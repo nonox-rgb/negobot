@@ -2,13 +2,27 @@
    <script src="menu.js" data-base="" data-page="accueil"></script>
    data-base : chemin vers la racine du site ("" ou "../")
    data-page : accueil, doc ou dashboard */
-(function () {
+(async function () {
   const script = document.currentScript;
   const base = script.dataset.base || "";
   const page = script.dataset.page || "";
 
-  /* À REMPLIR à l’étape 2 : adresse publique de l’API, ex. "https://mon-nom.ngrok.app" */
-  const API = "";
+  /* Adresse publique de l’API (ton tunnel), sans "/" à la fin */
+  const API = "https://TON-DOMAINE.ngrok-free.app";
+  window.NEGOBOT = { api: API, pret: false };
+
+  /* Retour de la connexion Discord : l’API renvoie vers la page avec #token=... */
+  const retour = location.hash.match(/^#token=([\w-]+)$/);
+  if (retour) {
+    try {
+      localStorage.setItem("negobot_token", retour[1]);
+      history.replaceState(null, "", location.pathname + location.search);
+      const r = await fetch(API + "/me", {
+        headers: { Authorization: "Bearer " + retour[1], "ngrok-skip-browser-warning": "1" }
+      });
+      if (r.ok) localStorage.setItem("negobot_user", JSON.stringify(await r.json()));
+    } catch (e) {}
+  }
 
   /* Anciens éléments de navigation remplacés par ce menu */
   document.querySelectorAll(".nav-doc, .haut").forEach(e => e.remove());
@@ -114,4 +128,7 @@
     try { localStorage.removeItem("negobot_user"); localStorage.removeItem("negobot_token"); } catch (e) {}
     location.reload();
   });
+
+  window.NEGOBOT.pret = true;
+  document.dispatchEvent(new Event("negobot-pret"));
 })();
