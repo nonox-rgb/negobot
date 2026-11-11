@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Documentation | NégoBot</title>
+<meta name="description" content="Comment ajouter NégoBot, comment il choisit ses réponses et comment l’utiliser.">
+<link rel="icon" href="../logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --nuit:#02034f; --cyan:#00b4ff;
+  --titre:'Sora','Helvetica Neue',Arial,sans-serif;
+  --texte:'DM Sans','Helvetica Neue',Arial,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:5.5rem}
+body{
+  font-family:var(--texte);font-size:1.0625rem;line-height:1.7;color:#dbe6ff;
+  -webkit-font-smoothing:antialiased;text-rendering:geometricPrecision;
+  background:
+    radial-gradient(60vmax 60vmax at 0% 0%,rgba(74,140,255,.5),transparent 60%),
+    radial-gradient(50vmax 50vmax at 100% 18%,rgba(0,180,255,.45),transparent 60%),
+    radial-gradient(70vmax 50vmax at 50% 100%,rgba(0,140,255,.4),transparent 60%),
+    radial-gradient(40vmax 40vmax at 45% 30%,#00006b,transparent 70%),
+    var(--nuit);
+  background-attachment:fixed;
+}
+h1,h2,h3{font-family:var(--titre);line-height:1.1;letter-spacing:-.035em}
+a{color:#9fd0ff}
+:focus-visible{outline:3px solid var(--cyan);outline-offset:4px;border-radius:12px}
+.metal{background:linear-gradient(180deg,#fff 10%,#e4e9f5 50%,#aab4c9 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 6px 28px rgba(0,100,255,.5))}
+.glace{background:linear-gradient(100deg,#fff 0%,#9fd0ff 50%,#00b4ff 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* Barre du haut */
+.haut{position:sticky;top:0;z-index:10;display:flex;flex-wrap:wrap;align-items:center;gap:.4rem 1.4rem;padding:.8rem 1.25rem;background:rgba(2,3,79,.68);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.12)}
+.marque{display:flex;align-items:center;gap:.65rem;font:800 1.1rem var(--titre);letter-spacing:-.03em;color:#fff;text-decoration:none;margin-right:auto}
+.marque img{width:2rem;height:2rem;border-radius:24%;display:block}
+.haut nav{display:flex;flex-wrap:wrap;gap:.2rem 1.1rem;font-size:.95rem}
+.haut nav a{color:#c3d6ff;text-decoration:none}
+.haut nav a:hover{color:#fff}
+
+/* Contenu */
+main{max-width:46rem;margin:0 auto;padding:4.5rem 1.25rem 3rem}
+h1{font-size:clamp(2.8rem,9vw,5rem);font-weight:800;margin-bottom:1rem}
+.chapo{font-size:1.25rem;color:#c3d6ff;margin-bottom:1rem}
+section{padding-top:3.8rem}
+h2{font-size:clamp(1.8rem,5vw,2.6rem);font-weight:800;margin-bottom:1.1rem}
+h3{font-size:1.2rem;font-weight:700;color:#fff;margin:1.6rem 0 .3rem;letter-spacing:-.02em}
+p+p,p+ul,p+ol,ul+p,ol+p{margin-top:1rem}
+ul,ol{padding-left:1.4rem;display:grid;gap:.55rem}
+li::marker{color:var(--cyan)}
+strong{color:#fff;font-weight:500}
+code{font:500 .92em/1 ui-monospace,SFMono-Regular,Menlo,monospace;padding:.18rem .55rem;border-radius:99px;background:rgba(255,255,255,.12);color:#fff}
+.note{margin-top:1.4rem;padding:1rem 1.3rem;border-radius:22px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);position:relative;padding-left:1.9rem}
+.note::before{content:"";position:absolute;left:.8rem;top:1rem;bottom:1rem;width:.35rem;border-radius:99px;background:linear-gradient(180deg,#fff,#00b4ff)}
+.regles{display:grid;gap:.7rem;margin-top:1.2rem}
+.regle{display:grid;grid-template-columns:minmax(8rem,11rem) 1fr;gap:.4rem 1.2rem;padding:.9rem 1.2rem;border-radius:20px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14)}
+.regle b{font:700 1rem var(--titre);color:#fff;letter-spacing:-.02em}
+.retour{margin-top:4rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,.14)}
+footer{text-align:center;padding:1rem 1.25rem 3rem;color:#8fb0f5;font-size:.95rem}
+@media (max-width:560px){.regle{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header class="haut">
+  <a class="marque" href="../"><img src="../logo.png" alt="" onerror="this.style.display='none'">NégoBot</a>
+  <nav aria-label="Sommaire">
+    <a href="#demarrer">Démarrer</a>
+    <a href="#fonctionnement">Fonctionnement</a>
+    <a href="#speciales">Réactions spéciales</a>
+    <a href="#commandes">Commandes</a>
+    <a href="#faq">Questions</a>
+  </nav>
+</header>
+
+<main>
+  <h1 class="metal">Documentation</h1>
+  <p class="chapo">Comment ajouter NégoBot, comment il choisit ses réponses, et comment lui échapper quand il en fait trop.</p>
+
+  <section id="demarrer">
+    <h2 class="glace">Démarrer</h2>
+    <ol>
+      <li>Sur la <a href="../">page d’accueil</a>, choisis ta version (Standard, Premium ou Ultimate) et clique sur <strong>Ajouter</strong>.</li>
+      <li>Sélectionne ton serveur. Il faut avoir la permission de gérer ce serveur.</li>
+      <li>Valide les permissions demandées : <code>Voir les salons</code>, <code>Envoyer des messages</code> et <code>Lire l’historique des messages</code>.</li>
+      <li>Écris un message qui contient un mot qu’il connaît. NégoBot ne devrait pas tarder à répondre.</li>
+    </ol>
+    <p>NégoBot Ultimate annonce son arrivée dans le salon système du serveur, ou à défaut dans le premier salon où il peut écrire.</p>
+  </section>
+
+  <section id="fonctionnement">
+    <h2 class="glace">Comment il fonctionne</h2>
+    <p>NégoBot lit les messages des salons qu’il peut voir et cherche dans chacun les mots de sa liste. Quand il en trouve un, il répond directement à ton message.</p>
+    <h3>Une réponse fixe ou au hasard</h3>
+    <p>Avec Standard, chaque mot a une seule réponse possible. Avec Ultimate, chaque mot a plusieurs réponses et NégoBot en tire une au hasard : le même mot ne donne pas toujours la même réplique.</p>
+    <h3>Le mot peut être n’importe où</h3>
+    <p>Avec Ultimate, le mot est reconnu même au milieu d’une phrase. Si ton message en contient plusieurs, NégoBot ne réagit qu’à celui qui apparaît <strong>en premier</strong>.</p>
+    <p>Exemple : dans « je mange une pizza et je te dis salut », il répond au mot « pizza ».</p>
+    <h3>Mots entiers seulement</h3>
+    <p>« salut » déclenche une réponse, mais pas « salutations ». Les majuscules ne comptent pas.</p>
+    <h3>Jamais de ping massif</h3>
+    <p>Ses réponses ne mentionnent personne. Même si quelqu’un écrit <code>@everyone</code> dans son message, NégoBot ne notifie pas tout le serveur.</p>
+    <div class="note">Les mots et leurs réponses sont écrits à la main dans une liste. NégoBot ne mémorise pas le contenu de tes conversations.</div>
+  </section>
+
+  <section id="speciales">
+    <h2 class="glace">Réactions spéciales</h2>
+    <p>Sur NégoBot Ultimate, certains débuts de message ont leur propre réaction. Elles passent avant la détection des mots, et seulement si le message <strong>commence</strong> par le mot concerné.</p>
+    <div class="regles">
+      <div class="regle"><b>« il » seul</b><span>NégoBot se demande si tu te fous de lui.</span></div>
+      <div class="regle"><b>« il » + des mots</b><span>Il reprend ta phrase et demande de qui tu parles.</span></div>
+      <div class="regle"><b>« bah » seul, ou avec un mot</b><span>Il répond « Développe stp. »</span></div>
+      <div class="regle"><b>« en vrai » seul</b><span>Il répond « En vrai quoi ? »</span></div>
+      <div class="regle"><b>« bah » ou « en vrai » + au moins deux mots</b><span>Il te donne raison, en répétant ta phrase.</span></div>
+    </div>
+    <h3>Les autres bots</h3>
+    <p>NégoBot Ultimate répond aussi aux messages des autres bots. Pour éviter que deux bots se répondent à l’infini, il n’en écoute qu’un seul message toutes les 15 secondes par salon.</p>
+  </section>
+
+  <section id="commandes">
+    <h2 class="glace">Commandes</h2>
+    <h3>NégoBot Ultimate</h3>
+    <p><code>/status</code> affiche le ping du bot, l’utilisation du processeur et l’espace de stockage libre de la machine qui l’héberge.</p>
+    <p>Un dashboard est en préparation : il permettra d’ajouter des extensions de modération avec un code.</p>
+    <h3>NégoBot Premium</h3>
+    <ul>
+      <li>Une ou deux commandes de modération</li>
+      <li>Une commande pour voir le dernier patch</li>
+      <li>Une commande pour obtenir les infos sur le bot</li>
+    </ul>
+    <p>Tape <code>/</code> dans un salon pour voir la liste des commandes disponibles sur ton serveur.</p>
+  </section>
+
+  <section id="faq">
+    <h2 class="glace">Questions fréquentes</h2>
+    <h3>Le bot ne répond pas</h3>
+    <ul>
+      <li>Vérifie qu’il apparaît en ligne. NégoBot Ultimate tourne sur un ordinateur personnel : s’il est éteint, le bot est hors ligne.</li>
+      <li>Vérifie qu’il a le droit de voir le salon et d’y écrire.</li>
+      <li>Vérifie que ton message contient un mot entier de sa liste.</li>
+    </ul>
+    <h3>Comment le faire taire ?</h3>
+    <p>Retire-lui l’accès au salon dans les permissions du salon, ou expulse-le du serveur.</p>
+    <h3>Les commandes n’apparaissent pas</h3>
+    <p>Ré-invite le bot depuis la page d’accueil pour lui donner l’accès aux commandes, puis redémarre Discord.</p>
+    <h3>Pourquoi il m’énerve ?</h3>
+    <p>C’est son seul but.</p>
+    <p class="retour"><a href="../">Retour à l’accueil</a></p>
+  </section>
+</main>
+
+<footer>© 2026 NégoBot. Fait pour embêter.</footer>
+</body>
+</html>
