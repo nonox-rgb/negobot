@@ -21,6 +21,12 @@ h1{font-size:clamp(2.6rem,8vw,4.5rem);font-weight:800;margin-bottom:1rem;backgro
 .carte h2{font-size:1.6rem;font-weight:800;color:#fff;margin-bottom:.6rem}
 .carte ul{padding-left:1.3rem;display:grid;gap:.5rem;margin-top:1rem}
 li::marker{color:#00b4ff}
+.grille{display:grid;gap:.9rem;margin-top:1.2rem}
+.serveur{display:flex;align-items:center;gap:1rem;padding:1rem 1.2rem;border-radius:999px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16)}
+.serveur .ic{width:3rem;height:3rem;border-radius:50%;flex:none;display:grid;place-items:center;font:800 1.2rem var(--titre);color:#fff;background:#3b57d6;object-fit:cover}
+.serveur .nom{flex:1;min-width:0;font:700 1.05rem var(--titre);color:#fff;letter-spacing:-.02em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.badge{flex:none;padding:.3rem .9rem;border-radius:99px;font-size:.85rem;font-weight:500;background:rgba(0,180,255,.22);color:#bfe6ff}
+.badge.admin{background:linear-gradient(180deg,#fff,#c6d2ec);color:#00104f;font-weight:700}
 strong{color:#fff;font-weight:500}
 </style>
 </head>
@@ -43,5 +49,62 @@ strong{color:#fff;font-weight:500}
   </section>
 </main>
 <script src="../menu.js" data-base="../" data-page="dashboard"></script>
+<script>
+(function () {
+  async function afficher() {
+    const zone = document.getElementById("etat");
+    if (location.hash === "#erreur") {
+      zone.innerHTML = "<h2>La connexion a échoué</h2><p>Réessaie avec le bouton en bas du menu.</p>";
+      return;
+    }
+    const token = localStorage.getItem("negobot_token");
+    if (!token) return;
+    zone.innerHTML = "<h2>Chargement de tes serveurs…</h2>";
+    try {
+      const r = await fetch(window.NEGOBOT.api + "/guilds", {
+        headers: { Authorization: "Bearer " + token, "ngrok-skip-browser-warning": "1" }
+      });
+      if (r.status === 401) {
+        localStorage.removeItem("negobot_token");
+        localStorage.removeItem("negobot_user");
+        location.reload();
+        return;
+      }
+      if (!r.ok) throw new Error();
+      const liste = await r.json();
+      zone.innerHTML = "<h2>Tes serveurs</h2>";
+      if (!liste.length) {
+        const p = document.createElement("p");
+        p.textContent = "NégoBot n’est dans aucun de tes serveurs pour l’instant.";
+        zone.appendChild(p);
+        return;
+      }
+      const grille = document.createElement("div");
+      grille.className = "grille";
+      liste.forEach(g => {
+        const ligne = document.createElement("div");
+        ligne.className = "serveur";
+        let ic;
+        if (g.icon) { ic = document.createElement("img"); ic.src = g.icon; ic.alt = ""; }
+        else { ic = document.createElement("span"); ic.textContent = g.name.charAt(0).toUpperCase(); }
+        ic.className = "ic";
+        const nom = document.createElement("span");
+        nom.className = "nom";
+        nom.textContent = g.name;
+        const badge = document.createElement("span");
+        badge.className = "badge" + (g.role === "admin" ? " admin" : "");
+        badge.textContent = g.role === "admin" ? "Administrateur" : "Membre";
+        ligne.append(ic, nom, badge);
+        grille.appendChild(ligne);
+      });
+      zone.appendChild(grille);
+    } catch (e) {
+      zone.innerHTML = "<h2>Impossible de joindre l’API</h2><p>Le bot est peut-être hors ligne. Réessaie dans un instant.</p>";
+    }
+  }
+  if (window.NEGOBOT && window.NEGOBOT.pret) afficher();
+  else document.addEventListener("negobot-pret", afficher);
+})();
+</script>
 </body>
 </html>
