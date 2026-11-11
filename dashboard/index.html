@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dashboard | NégoBot</title>
+<link rel="icon" href="../logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--nuit:#02034f;--titre:'Sora','Helvetica Neue',Arial,sans-serif;--texte:'DM Sans','Helvetica Neue',Arial,sans-serif;color-scheme:dark}
+*{box-sizing:border-box;margin:0}
+body{font-family:var(--texte);font-size:1.0625rem;line-height:1.65;color:#dbe6ff;-webkit-font-smoothing:antialiased;min-height:100vh;
+  background:radial-gradient(60vmax 60vmax at 0% 0%,rgba(74,140,255,.5),transparent 60%),radial-gradient(50vmax 50vmax at 100% 18%,rgba(0,180,255,.45),transparent 60%),radial-gradient(70vmax 50vmax at 50% 100%,rgba(0,140,255,.4),transparent 60%),radial-gradient(40vmax 40vmax at 45% 30%,#00006b,transparent 70%),var(--nuit);background-attachment:fixed}
+h1,h2{font-family:var(--titre);line-height:1.08;letter-spacing:-.035em}
+main{max-width:50rem;margin:0 auto;padding:5.5rem 1.25rem 4rem}
+h1{font-size:clamp(2.6rem,8vw,4.5rem);font-weight:800;margin-bottom:1rem;background:linear-gradient(180deg,#fff 10%,#e4e9f5 50%,#aab4c9 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 6px 28px rgba(0,100,255,.5))}
+.chapo{font-size:1.2rem;color:#c3d6ff;max-width:34rem}
+.carte{margin-top:2.5rem;padding:1.8rem;border-radius:32px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.carte h2{font-size:1.6rem;font-weight:800;color:#fff;margin-bottom:.6rem}
+.carte ul{padding-left:1.3rem;display:grid;gap:.5rem;margin-top:1rem}
+li::marker{color:#00b4ff}
+strong{color:#fff;font-weight:500}
+</style>
+</head>
+<body>
+<main>
+  <h1>Dashboard</h1>
+  <p class="chapo">Retrouve ici les serveurs où NégoBot est présent et gère-les depuis ton navigateur.</p>
+
+  <section class="carte" id="etat">
+    <h2>Connecte-toi pour commencer</h2>
+    <p>Utilise le bouton <strong>Se connecter avec Discord</strong> en bas du menu pour afficher tes serveurs.</p>
+  </section>
+
+  <section class="carte">
+    <h2>Ce qui t’attend</h2>
+    <ul>
+      <li><strong>Administrateur d’un serveur :</strong> avertir un membre, créer un salon honeypot et d’autres outils de modération.</li>
+      <li><strong>Simple membre :</strong> voir ton niveau et ton XP sur le serveur.</li>
+    </ul>
+  </section>
+</main>
+<script src="../menu.js" data-base="../" data-page="dashboard"></script>
+</body>
+</html>
