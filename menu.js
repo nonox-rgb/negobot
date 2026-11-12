@@ -8,7 +8,7 @@
   const page = script.dataset.page || "";
 
   /* Adresse publique de l’API (ton tunnel), sans "/" à la fin */
-  const API = "https://TON-DOMAINE.ngrok-free.app";
+ const API = "https://deem-cash-almighty.ngrok-free.dev";
   window.NEGOBOT = { api: API, pret: false };
 
   /* Retour de la connexion Discord : l’API renvoie vers la page avec #token=... */
