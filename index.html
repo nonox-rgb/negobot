@@ -214,9 +214,12 @@ const IDS = {
   premium:  "1434640168895381676",
   ultimate: "1445928210578542602"
 };
-const lien = id => "https://discord.com/oauth2/authorize?client_id=" + id +
-  "&scope=bot%20applications.commands&permissions=68608";
-document.querySelectorAll("[data-invite]").forEach(a => { a.href = lien(IDS[a.dataset.invite]); });
+const PERMISSIONS = { standard: 68608, premium: 68608, ultimate: 85012 };
+const lien = (id, perms) => "https://discord.com/oauth2/authorize?client_id=" + id +
+  "&scope=bot%20applications.commands&permissions=" + perms;
+document.querySelectorAll("[data-invite]").forEach(a => {
+  a.href = lien(IDS[a.dataset.invite], PERMISSIONS[a.dataset.invite]);
+});
 
 /* Phrases d’accroche qui défilent */
 const phrases = ["s’incruster partout.", "avoir le dernier mot.", "gâcher tes discussions.", "te couper la parole."];
