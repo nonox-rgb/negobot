@@ -13,21 +13,47 @@
 *{box-sizing:border-box;margin:0}
 body{font-family:var(--texte);font-size:1.0625rem;line-height:1.65;color:#dbe6ff;-webkit-font-smoothing:antialiased;min-height:100vh;
   background:radial-gradient(60vmax 60vmax at 0% 0%,rgba(74,140,255,.5),transparent 60%),radial-gradient(50vmax 50vmax at 100% 18%,rgba(0,180,255,.45),transparent 60%),radial-gradient(70vmax 50vmax at 50% 100%,rgba(0,140,255,.4),transparent 60%),radial-gradient(40vmax 40vmax at 45% 30%,#00006b,transparent 70%),var(--nuit);background-attachment:fixed}
-h1,h2{font-family:var(--titre);line-height:1.08;letter-spacing:-.035em}
+h1,h2,h3{font-family:var(--titre);line-height:1.08;letter-spacing:-.035em}
 main{max-width:50rem;margin:0 auto;padding:5.5rem 1.25rem 4rem}
 h1{font-size:clamp(2.6rem,8vw,4.5rem);font-weight:800;margin-bottom:1rem;background:linear-gradient(180deg,#fff 10%,#e4e9f5 50%,#aab4c9 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 6px 28px rgba(0,100,255,.5))}
 .chapo{font-size:1.2rem;color:#c3d6ff;max-width:34rem}
-.carte{margin-top:2.5rem;padding:1.8rem;border-radius:32px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+[hidden]{display:none!important}
+.carte{margin-top:1.6rem;padding:1.8rem;border-radius:32px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
 .carte h2{font-size:1.6rem;font-weight:800;color:#fff;margin-bottom:.6rem}
-.carte ul{padding-left:1.3rem;display:grid;gap:.5rem;margin-top:1rem}
-li::marker{color:#00b4ff}
+:focus-visible{outline:3px solid #00b4ff;outline-offset:3px}
 .grille{display:grid;gap:.9rem;margin-top:1.2rem}
-.serveur{display:flex;align-items:center;gap:1rem;padding:1rem 1.2rem;border-radius:999px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16)}
-.serveur .ic{width:3rem;height:3rem;border-radius:50%;flex:none;display:grid;place-items:center;font:800 1.2rem var(--titre);color:#fff;background:#3b57d6;object-fit:cover}
-.serveur .nom{flex:1;min-width:0;font:700 1.05rem var(--titre);color:#fff;letter-spacing:-.02em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.serveur{display:flex;align-items:center;gap:1rem;width:100%;text-align:left;font:inherit;color:inherit;cursor:pointer;padding:1rem 1.2rem;border-radius:999px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);transition:background .2s,transform .2s}
+.serveur:hover{background:rgba(255,255,255,.14);transform:translateY(-2px)}
+.ic{width:3rem;height:3rem;border-radius:50%;flex:none;display:grid;place-items:center;font:800 1.2rem var(--titre);color:#fff;background:#3b57d6;object-fit:cover}
+.nom{flex:1;min-width:0;font:700 1.05rem var(--titre);color:#fff;letter-spacing:-.02em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .badge{flex:none;padding:.3rem .9rem;border-radius:99px;font-size:.85rem;font-weight:500;background:rgba(0,180,255,.22);color:#bfe6ff}
 .badge.admin{background:linear-gradient(180deg,#fff,#c6d2ec);color:#00104f;font-weight:700}
-strong{color:#fff;font-weight:500}
+.btn{display:inline-block;font:700 .95rem var(--titre);letter-spacing:-.01em;padding:.75rem 1.4rem;border-radius:999px;border:0;cursor:pointer;color:#fff;background:linear-gradient(180deg,#0a5cff,#0030c8);box-shadow:0 6px 20px rgba(0,60,255,.45)}
+.btn:disabled{opacity:.5;cursor:default}
+.btn.sec{background:transparent;box-shadow:none;border:1.5px solid rgba(255,255,255,.35)}
+.btn.petit{padding:.4rem .9rem;font-size:.85rem}
+.retour{margin-top:2rem}
+.niveau-grand{font:800 clamp(3rem,10vw,5rem)/1 var(--titre);letter-spacing:-.04em;background:linear-gradient(180deg,#fff,#7fb2ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.stats{display:flex;flex-wrap:wrap;gap:.5rem 2rem;margin:.8rem 0 1.1rem;color:#c3d6ff}
+.stats strong{color:#fff;font-weight:500}
+.barre{height:14px;border-radius:99px;background:rgba(255,255,255,.14);overflow:hidden}
+.barre i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#00b4ff,#fff)}
+label{display:block;margin:1rem 0 .35rem;font-weight:500;color:#fff}
+input[type=search],input[type=text]{width:100%;font:inherit;color:#fff;padding:.8rem 1.2rem;border-radius:999px;border:1.5px solid rgba(255,255,255,.3);background:rgba(2,3,79,.5)}
+input::placeholder{color:#8fb0f5}
+.resultats{display:grid;gap:.4rem;margin-top:.6rem}
+.membre{display:flex;align-items:center;gap:.7rem;width:100%;text-align:left;font:inherit;color:#fff;cursor:pointer;padding:.5rem .9rem;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14)}
+.membre:hover{background:rgba(255,255,255,.16)}
+.membre img,.membre span.ic{width:2rem;height:2rem;font-size:.9rem}
+.choisi{margin-top:.8rem;color:#fff}
+.msg{margin-top:.9rem;min-height:1.5rem;color:#bfe6ff}
+.msg.err{color:#ffb3b3}
+.liste-warns{display:grid;gap:.6rem;margin-top:1rem}
+.warn{display:flex;align-items:center;gap:1rem;padding:.8rem 1.1rem;border-radius:22px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14)}
+.warn div{flex:1;min-width:0}
+.warn b{color:#fff;font-family:var(--titre);letter-spacing:-.02em}
+.warn small{display:block;color:#a9c4ff}
+.warn p{overflow-wrap:anywhere}
 </style>
 </head>
 <body>
@@ -40,70 +66,219 @@ strong{color:#fff;font-weight:500}
     <p>Utilise le bouton <strong>Se connecter avec Discord</strong> en bas du menu pour afficher tes serveurs.</p>
   </section>
 
-  <section class="carte">
-    <h2>Ce qui t’attend</h2>
-    <ul>
-      <li><strong>Administrateur d’un serveur :</strong> avertir un membre, créer un salon honeypot et d’autres outils de modération.</li>
-      <li><strong>Simple membre :</strong> voir ton niveau et ton XP sur le serveur.</li>
-    </ul>
-  </section>
+  <div id="vue" hidden></div>
 </main>
+
 <script src="../menu.js" data-base="../" data-page="dashboard"></script>
 <script>
 (function () {
-  async function afficher() {
-    const zone = document.getElementById("etat");
-    if (location.hash === "#erreur") {
-      zone.innerHTML = "<h2>La connexion a échoué</h2><p>Réessaie avec le bouton en bas du menu.</p>";
-      return;
+  const zone = document.getElementById("etat");
+  const vue = document.getElementById("vue");
+  let minuteur = null;
+
+  function el(tag, attrs, ...enfants) {
+    const n = document.createElement(tag);
+    for (const [k, v] of Object.entries(attrs || {})) {
+      if (k === "class") n.className = v;
+      else if (k.startsWith("on")) n.addEventListener(k.slice(2), v);
+      else n.setAttribute(k, v);
     }
-    const token = localStorage.getItem("negobot_token");
-    if (!token) return;
-    zone.innerHTML = "<h2>Chargement de tes serveurs…</h2>";
+    n.append(...enfants);
+    return n;
+  }
+  const pastille = (url, nom) => url
+    ? el("img", { class: "ic", src: url, alt: "" })
+    : el("span", { class: "ic" }, nom.charAt(0).toUpperCase());
+
+  function deconnecter() {
+    localStorage.removeItem("negobot_token");
+    localStorage.removeItem("negobot_user");
+    location.reload();
+  }
+  async function appel(chemin, options) {
+    options = options || {};
+    const r = await fetch(window.NEGOBOT.api + chemin, {
+      method: options.method || "GET",
+      body: options.body,
+      headers: Object.assign({
+        Authorization: "Bearer " + localStorage.getItem("negobot_token"),
+        "ngrok-skip-browser-warning": "1"
+      }, options.json ? { "Content-Type": "application/json" } : {})
+    });
+    if (r.status === 401) { deconnecter(); throw new Error("401"); }
+    return r;
+  }
+
+  /* ---------- Liste des serveurs ---------- */
+  async function afficherServeurs() {
+    zone.hidden = false;
+    vue.hidden = true;
+    zone.replaceChildren(el("h2", {}, "Chargement de tes serveurs…"));
     try {
-      const r = await fetch(window.NEGOBOT.api + "/guilds", {
-        headers: { Authorization: "Bearer " + token, "ngrok-skip-browser-warning": "1" }
-      });
-      if (r.status === 401) {
-        localStorage.removeItem("negobot_token");
-        localStorage.removeItem("negobot_user");
-        location.reload();
-        return;
-      }
+      const r = await appel("/guilds");
       if (!r.ok) throw new Error();
       const liste = await r.json();
-      zone.innerHTML = "<h2>Tes serveurs</h2>";
+      zone.replaceChildren(el("h2", {}, "Tes serveurs"));
       if (!liste.length) {
-        const p = document.createElement("p");
-        p.textContent = "NégoBot n’est dans aucun de tes serveurs pour l’instant.";
-        zone.appendChild(p);
+        zone.append(el("p", {}, "NégoBot n’est dans aucun de tes serveurs pour l’instant."));
         return;
       }
-      const grille = document.createElement("div");
-      grille.className = "grille";
+      const grille = el("div", { class: "grille" });
       liste.forEach(g => {
-        const ligne = document.createElement("div");
-        ligne.className = "serveur";
-        let ic;
-        if (g.icon) { ic = document.createElement("img"); ic.src = g.icon; ic.alt = ""; }
-        else { ic = document.createElement("span"); ic.textContent = g.name.charAt(0).toUpperCase(); }
-        ic.className = "ic";
-        const nom = document.createElement("span");
-        nom.className = "nom";
-        nom.textContent = g.name;
-        const badge = document.createElement("span");
-        badge.className = "badge" + (g.role === "admin" ? " admin" : "");
-        badge.textContent = g.role === "admin" ? "Administrateur" : "Membre";
-        ligne.append(ic, nom, badge);
-        grille.appendChild(ligne);
+        const admin = g.role === "admin";
+        grille.append(el("button", { class: "serveur", type: "button", onclick: () => ouvrirServeur(g) },
+          pastille(g.icon, g.name),
+          el("span", { class: "nom" }, g.name),
+          el("span", { class: "badge" + (admin ? " admin" : "") }, admin ? "Administrateur" : "Membre")
+        ));
       });
-      zone.appendChild(grille);
+      zone.append(grille);
     } catch (e) {
-      zone.innerHTML = "<h2>Impossible de joindre l’API</h2><p>Le bot est peut-être hors ligne. Réessaie dans un instant.</p>";
+      if (e.message !== "401") {
+        zone.replaceChildren(el("h2", {}, "Impossible de joindre l’API"),
+          el("p", {}, "Le bot est peut-être hors ligne. Réessaie dans un instant."));
+      }
     }
   }
-  if (window.NEGOBOT && window.NEGOBOT.pret) afficher();
-  else document.addEventListener("negobot-pret", afficher);
+
+  /* ---------- Vue d'un serveur ---------- */
+  async function ouvrirServeur(g) {
+    zone.hidden = true;
+    vue.hidden = false;
+    vue.replaceChildren(
+      el("h2", { style: "margin-top:1.6rem;font-size:2rem;color:#fff" }, g.name),
+      el("div", { class: "carte", id: "carte-niveau" }, el("h2", {}, "Ton niveau"), el("p", {}, "Chargement…"))
+    );
+    if (g.role === "admin") vue.append(blocModeration(g));
+    vue.append(el("div", { class: "retour" }, el("button", { class: "btn sec", type: "button", onclick: afficherServeurs }, "← Retour aux serveurs")));
+    chargerNiveau(g);
+  }
+
+  async function chargerNiveau(g) {
+    const carte = document.getElementById("carte-niveau");
+    try {
+      const r = await appel("/guilds/" + g.id + "/me");
+      if (!r.ok) throw new Error();
+      const n = await r.json();
+      const pct = n.requis ? Math.round(100 * n.dans_niveau / n.requis) : 0;
+      const barre = el("div", { class: "barre" }, el("i", { style: "width:" + pct + "%" }));
+      carte.replaceChildren(
+        el("h2", {}, "Ton niveau"),
+        el("div", { class: "niveau-grand" }, "Niveau " + n.niveau),
+        el("div", { class: "stats" },
+          el("span", {}, "XP total : ", el("strong", {}, String(n.xp))),
+          el("span", {}, "Rang : ", el("strong", {}, n.rang ? "#" + n.rang : "—")),
+          el("span", {}, "Progression : ", el("strong", {}, n.dans_niveau + " / " + n.requis))
+        ),
+        barre,
+        el("p", { style: "margin-top:1rem;color:#a9c4ff" }, "L’XP se gagne quand NégoBot Ultimate te répond, avec un délai d’une minute entre deux gains.")
+      );
+    } catch (e) {
+      if (e.message !== "401") carte.replaceChildren(el("h2", {}, "Ton niveau"), el("p", {}, "Impossible de charger ton niveau."));
+    }
+  }
+
+  /* ---------- Modération (administrateurs) ---------- */
+  function blocModeration(g) {
+    let choisi = null;
+    const msg = el("p", { class: "msg" });
+    const resultats = el("div", { class: "resultats" });
+    const etiquette = el("p", { class: "choisi" });
+    const raison = el("input", { type: "text", maxlength: "300", placeholder: "Raison de l’avertissement" });
+    const bouton = el("button", { class: "btn", type: "button", disabled: "" }, "Avertir");
+    const liste = el("div", { class: "liste-warns" });
+
+    const dire = (texte, erreur) => { msg.textContent = texte; msg.className = "msg" + (erreur ? " err" : ""); };
+    const majBouton = () => { bouton.disabled = !(choisi && raison.value.trim()); };
+
+    const recherche = el("input", { type: "search", placeholder: "Nom du membre (2 lettres minimum)", autocomplete: "off" });
+    recherche.addEventListener("input", () => {
+      clearTimeout(minuteur);
+      const q = recherche.value.trim();
+      if (q.length < 2) { resultats.replaceChildren(); return; }
+      minuteur = setTimeout(async () => {
+        try {
+          const r = await appel("/guilds/" + g.id + "/members?q=" + encodeURIComponent(q));
+          if (r.status === 503) { dire("La recherche de membres n’est pas activée sur le bot (Server Members Intent).", true); return; }
+          if (!r.ok) throw new Error();
+          const membres = await r.json();
+          resultats.replaceChildren(...membres.map(m => el("button", {
+            class: "membre", type: "button",
+            onclick: () => {
+              choisi = m;
+              etiquette.textContent = "Membre choisi : " + m.name;
+              resultats.replaceChildren();
+              recherche.value = "";
+              majBouton();
+            }
+          }, pastille(m.avatar, m.name), m.name)));
+          if (!membres.length) resultats.replaceChildren(el("p", { class: "msg" }, "Aucun membre trouvé."));
+        } catch (e) { if (e.message !== "401") dire("La recherche a échoué.", true); }
+      }, 300);
+    });
+    raison.addEventListener("input", majBouton);
+
+    bouton.addEventListener("click", async () => {
+      bouton.disabled = true;
+      try {
+        const r = await appel("/guilds/" + g.id + "/warns", {
+          method: "POST", json: true,
+          body: JSON.stringify({ user_id: choisi.id, raison: raison.value })
+        });
+        if (!r.ok) throw new Error();
+        const res = await r.json();
+        dire(choisi.name + " a reçu un avertissement (" + res.total + " au total).");
+        choisi = null; etiquette.textContent = ""; raison.value = "";
+        chargerWarns();
+      } catch (e) { if (e.message !== "401") dire("Impossible d’envoyer l’avertissement.", true); }
+      majBouton();
+    });
+
+    async function chargerWarns() {
+      try {
+        const r = await appel("/guilds/" + g.id + "/warns");
+        if (!r.ok) throw new Error();
+        const warns = await r.json();
+        if (!warns.length) { liste.replaceChildren(el("p", {}, "Aucun avertissement pour l’instant.")); return; }
+        liste.replaceChildren(...warns.map(w => el("div", { class: "warn" },
+          el("div", {},
+            el("b", {}, w.name),
+            el("small", {}, "#" + w.id + " · " + new Date(w.date * 1000).toLocaleDateString("fr-FR")),
+            el("p", {}, w.raison)),
+          el("button", {
+            class: "btn sec petit", type: "button",
+            onclick: async () => {
+              try { await appel("/guilds/" + g.id + "/warns/" + w.id, { method: "DELETE" }); chargerWarns(); }
+              catch (e) { /* déconnexion gérée dans appel */ }
+            }
+          }, "Retirer")
+        )));
+      } catch (e) { if (e.message !== "401") liste.replaceChildren(el("p", {}, "Impossible de charger les avertissements.")); }
+    }
+    chargerWarns();
+
+    return el("div", { class: "carte" },
+      el("h2", {}, "Modération"),
+      el("label", {}, "Avertir un membre"),
+      recherche, resultats, etiquette,
+      el("label", {}, "Raison"), raison,
+      el("div", { style: "margin-top:1rem" }, bouton),
+      msg,
+      el("h3", { style: "margin-top:1.8rem;font-size:1.2rem;color:#fff" }, "Derniers avertissements"),
+      liste
+    );
+  }
+
+  /* ---------- Démarrage ---------- */
+  function demarrer() {
+    if (location.hash === "#erreur") {
+      zone.replaceChildren(el("h2", {}, "La connexion a échoué"), el("p", {}, "Réessaie avec le bouton en bas du menu."));
+      return;
+    }
+    if (localStorage.getItem("negobot_token")) afficherServeurs();
+  }
+  if (window.NEGOBOT && window.NEGOBOT.pret) demarrer();
+  else document.addEventListener("negobot-pret", demarrer);
 })();
 </script>
 </body>
